@@ -35,26 +35,20 @@ public class GameScene extends Scene {
             }
             if (keyEvent.getCode() == KeyCode.RIGHT) {
                 snake.changeDirection("right");
+                start = true;
             }
             if (keyEvent.getCode() == KeyCode.UP) {
                 snake.changeDirection("up");
+                start = true;
             }
             if (keyEvent.getCode() == KeyCode.DOWN) {
                 snake.changeDirection("down");
-            }
-            if (keyEvent.getCode() == KeyCode.ENTER) {
                 start = true;
             }
             if (keyEvent.getCode() == KeyCode.R) {
                 gameOver = false;
             }
         });
-    }
-
-    public void drawStartMessage() {
-        graphicsContext.setFill(Color.WHITESMOKE);
-        graphicsContext.setFont(new Font("Digital-7", 65));
-        graphicsContext.fillText("Press Enter to Start", 120, 400);
     }
 
     public void drawGameOverMessage() {

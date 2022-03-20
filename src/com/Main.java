@@ -55,7 +55,6 @@ public class Main extends Application {
             gameScene.drawScore(score);
             gameScene.spawnSnake();
             gameScene.spawnFood();
-            gameScene.drawStartMessage();
         }
         if (gameScene.isStart() && !gameScene.isGameOver()) {
             gameScene.drawGrid();
