@@ -129,26 +129,19 @@ public class GameScene extends Scene {
     }
 
     public void checkCollision() {
-        if ( // snake food collision
-                snake.getBody().get(snake.getBody().size() - 1).getX() == food.getPosition().getX() &&
-                        snake.getBody().get(snake.getBody().size() - 1).getY() == food.getPosition().getY()
-        ) {
+        if (snake.getBody().get(snake.getBody().size() - 1).equals(food.getPosition())) { // snake eats food
             snake.incrementLength();
-            snake.setCurrentColor(food.getCOLORS()[food.getCurrentColor()]);
-
+            snake.setCurrentColor(food.COLORS[food.getCurrentColor()]);
             food.setIsEaten(true);
-        } else if (snake.getBody().get(snake.getBody().size() - 1).getX() < CELL_SIZE || // snake out of bounds collision
+        } else if (snake.getBody().get(snake.getBody().size() - 1).getX() < CELL_SIZE || // snake is out of bounds
                 snake.getBody().get(snake.getBody().size() - 1).getY() < CELL_SIZE ||
                 snake.getBody().get(snake.getBody().size() - 1).getX() > CELL_SIZE * (GRID_ROWS_COLUMNS - 2) ||
                 snake.getBody().get(snake.getBody().size() - 1).getY() > CELL_SIZE * (GRID_ROWS_COLUMNS - 2)) {
             gameOver = true;
             start = false;
-        } else { // snake eats its own body collision
+        } else { // snake eats its own tail
             for (int i = 1; i < snake.getBody().size(); ++i) {
-                if (
-                        snake.getBody().get(0).getX() == snake.getBody().get(i).getX() &&
-                                snake.getBody().get(0).getY() == snake.getBody().get(i).getY()
-                ) {
+                if (snake.getBody().get(0).equals(snake.getBody().get(i))) {
                     gameOver = true;
                     start = false;
                     break;

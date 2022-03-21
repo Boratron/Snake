@@ -7,6 +7,10 @@ import java.util.Random;
 
 public class Food {
     private Point2D position;
+    private int currentColor;
+    private boolean eaten;
+    private final Random random;
+
     public final Color[] COLORS = {
             Color.CRIMSON,
             Color.ORANGE,
@@ -16,9 +20,6 @@ public class Food {
             Color.LAWNGREEN,
             Color.WHITESMOKE
     };
-    private int currentColor;
-    private boolean eaten;
-    private final Random random;
 
     public Food() {
         this.position = null;
@@ -43,10 +44,6 @@ public class Food {
 
     public void setPosition(Point2D position) {
         this.position = position;
-    }
-
-    public Color[] getCOLORS() {
-        return COLORS;
     }
 
     public int getCurrentColor() {
