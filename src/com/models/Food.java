@@ -21,14 +21,15 @@ public class Food {
     private final Random random;
 
     public Food() {
+        this.position = null;
         this.random = new Random();
         this.currentColor = random.nextInt(COLORS.length);
         this.eaten = false;
     }
 
     public Point2D generateNewPosition(GameScene gameScene) {
-        int xPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.SQUARE_SIZE;
-        int yPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.SQUARE_SIZE;
+        int xPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.CELL_SIZE;
+        int yPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.CELL_SIZE;
         return new Point2D(xPosition, yPosition);
     }
 

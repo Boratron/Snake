@@ -69,7 +69,6 @@ public class Snake {
         int yHeadPosition = (int) body.get(body.size() - 1).getY() + ySpeed;
 
         body.add(new Point2D(xHeadPosition, yHeadPosition));
-        //System.out.println("Snake position: " + body.get(body.size() - 1).toString());
 
         if (body.size() > length) body.remove(0);
     }

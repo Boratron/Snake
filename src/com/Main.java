@@ -34,7 +34,7 @@ public class Main extends Application {
         GameScene gameScene = new GameScene(
                 graphicsContext, snake, food, root, SCREEN_WIDTH_HEIGHT, SCREEN_WIDTH_HEIGHT, Color.BLACK);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(75), e -> run(gameScene)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(76), e -> run(gameScene)));
         timeline.setCycleCount(Animation.INDEFINITE);
 
         root.getChildren().add(canvas);
@@ -53,8 +53,9 @@ public class Main extends Application {
             score = 0;
             gameScene.drawGrid();
             gameScene.drawScore(score);
-            gameScene.spawnSnake();
-            gameScene.spawnFood();
+            gameScene.drawSnake();
+            gameScene.generateFood();
+            gameScene.drawFood();
         }
         if (gameScene.isStart() && !gameScene.isGameOver()) {
             gameScene.drawGrid();
@@ -68,7 +69,6 @@ public class Main extends Application {
             gameScene.drawFood();
 
             gameScene.getSnake().move();
-
             gameScene.drawSnake();
         }
         if (!gameScene.isStart() && gameScene.isGameOver()) {

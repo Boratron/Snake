@@ -11,7 +11,7 @@ import javafx.scene.text.Font;
 public class GameScene extends Scene {
     public final int GRID_WIDTH_HEIGHT = 800; // 800 x 800
     public final int GRID_ROWS_COLUMNS = 20; // 20 x 20
-    public final int SQUARE_SIZE = GRID_WIDTH_HEIGHT / GRID_ROWS_COLUMNS; // 40
+    public final int CELL_SIZE = GRID_WIDTH_HEIGHT / GRID_ROWS_COLUMNS; // 40
 
     private final GraphicsContext graphicsContext;
 
@@ -70,9 +70,9 @@ public class GameScene extends Scene {
 
         for (int i = 0; i < GRID_ROWS_COLUMNS; ++i) {
             for (int j = 0; j < GRID_ROWS_COLUMNS; ++j) {
-                graphicsContext.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                graphicsContext.fillRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 if ((i > 0 && i < GRID_ROWS_COLUMNS - 1) && (j > 0 && j < GRID_ROWS_COLUMNS - 1)) {
-                    graphicsContext.strokeRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                    graphicsContext.strokeRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 }
             }
         }
@@ -83,38 +83,19 @@ public class GameScene extends Scene {
             graphicsContext.setStroke(Color.BLACK);
             graphicsContext.setFill(snake.getCurrentColor());
 
-            graphicsContext.strokeRect(bodyPart.getX(), bodyPart.getY(), SQUARE_SIZE, SQUARE_SIZE);
-            graphicsContext.fillRect(bodyPart.getX(), bodyPart.getY(), SQUARE_SIZE, SQUARE_SIZE);
+            graphicsContext.strokeRect(bodyPart.getX(), bodyPart.getY(), CELL_SIZE, CELL_SIZE);
+            graphicsContext.fillRect(bodyPart.getX(), bodyPart.getY(), CELL_SIZE, CELL_SIZE);
         }
     }
 
-    public void spawnSnake() {
-        graphicsContext.setFill(snake.getCurrentColor());
-        graphicsContext.setStroke(Color.BLACK);
-
-        graphicsContext.fillRect(
-                snake.getDefaultPosition().getX(),
-                snake.getDefaultPosition().getY(),
-                SQUARE_SIZE,
-                SQUARE_SIZE
-        );
-        graphicsContext.strokeRect(
-                snake.getDefaultPosition().getX(),
-                snake.getDefaultPosition().getY(),
-                SQUARE_SIZE,
-                SQUARE_SIZE
-        );
-    }
-
-    public void spawnFood() {
-        Point2D position;
-        do {
-            position = food.generateNewPosition(this);
-        } while (position.equals(snake.getBody().get(snake.getBody().size() - 1)));
-        food.setPosition(position);
-    }
-
     public void generateFood() {
+        if (food.getPosition() == null || food.getPosition().equals(snake.getDefaultPosition())) {
+            Point2D position;
+            do {
+                position = food.generateNewPosition(this);
+            } while (position.equals(snake.getBody().get(snake.getBody().size() - 1)));
+            food.setPosition(position);
+        }
         if (food.getIsEaten()) {
             Point2D foodPosition = food.generateNewPosition(this);
             for (Point2D body : snake.getBody()) {
@@ -136,14 +117,14 @@ public class GameScene extends Scene {
         graphicsContext.fillRect(
                 food.getPosition().getX(),
                 food.getPosition().getY(),
-                SQUARE_SIZE,
-                SQUARE_SIZE
+                CELL_SIZE,
+                CELL_SIZE
         );
         graphicsContext.strokeRect(
                 food.getPosition().getX(),
                 food.getPosition().getY(),
-                SQUARE_SIZE,
-                SQUARE_SIZE
+                CELL_SIZE,
+                CELL_SIZE
         );
     }
 
@@ -156,10 +137,10 @@ public class GameScene extends Scene {
             snake.setCurrentColor(food.getCOLORS()[food.getCurrentColor()]);
 
             food.setIsEaten(true);
-        } else if (snake.getBody().get(snake.getBody().size() - 1).getX() < SQUARE_SIZE || // out of bounds collision
-                snake.getBody().get(snake.getBody().size() - 1).getY() < SQUARE_SIZE ||
-                snake.getBody().get(snake.getBody().size() - 1).getX() > SQUARE_SIZE * (GRID_ROWS_COLUMNS - 2) ||
-                snake.getBody().get(snake.getBody().size() - 1).getY() > SQUARE_SIZE * (GRID_ROWS_COLUMNS - 2)) {
+        } else if (snake.getBody().get(snake.getBody().size() - 1).getX() < CELL_SIZE || // snake out of bounds collision
+                snake.getBody().get(snake.getBody().size() - 1).getY() < CELL_SIZE ||
+                snake.getBody().get(snake.getBody().size() - 1).getX() > CELL_SIZE * (GRID_ROWS_COLUMNS - 2) ||
+                snake.getBody().get(snake.getBody().size() - 1).getY() > CELL_SIZE * (GRID_ROWS_COLUMNS - 2)) {
             gameOver = true;
             start = false;
         } else { // snake eats its own body collision
