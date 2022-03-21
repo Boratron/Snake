@@ -33,17 +33,19 @@ public class GameScene extends Scene {
             if (keyEvent.getCode() == KeyCode.LEFT) {
                 snake.changeDirection("left");
             }
-            if (keyEvent.getCode() == KeyCode.RIGHT) {
-                snake.changeDirection("right");
-                start = true;
-            }
-            if (keyEvent.getCode() == KeyCode.UP) {
-                snake.changeDirection("up");
-                start = true;
-            }
-            if (keyEvent.getCode() == KeyCode.DOWN) {
-                snake.changeDirection("down");
-                start = true;
+            if (!gameOver) {
+                if (keyEvent.getCode() == KeyCode.RIGHT) {
+                    snake.changeDirection("right");
+                    start = true;
+                }
+                if (keyEvent.getCode() == KeyCode.UP) {
+                    snake.changeDirection("up");
+                    start = true;
+                }
+                if (keyEvent.getCode() == KeyCode.DOWN) {
+                    snake.changeDirection("down");
+                    start = true;
+                }
             }
             if (keyEvent.getCode() == KeyCode.R) {
                 gameOver = false;
