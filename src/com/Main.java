@@ -60,9 +60,7 @@ public class Main extends Application {
             gameScene.drawGrid();
             gameScene.drawScore(score);
 
-            gameScene.snakeOutOfBoundsCollision();
-            gameScene.snakeTailCollision();
-            gameScene.snakeFoodCollision();
+            gameScene.checkCollision();
 
             if (gameScene.getFood().getIsEaten()) ++score;
 
