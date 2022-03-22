@@ -6,10 +6,11 @@ import javafx.scene.paint.Color;
 import java.util.Random;
 
 public class Food {
+    private final Random random;
+
     private Point2D position;
     private int currentColor;
     private boolean eaten;
-    private final Random random;
 
     public final Color[] COLORS = {
             Color.CRIMSON,

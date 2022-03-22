@@ -15,6 +15,7 @@ import javafx.util.Duration;
 
 public class Main extends Application {
     private final static int SCREEN_WIDTH_HEIGHT = 800;
+
     private static int score;
 
     static {
@@ -27,14 +28,9 @@ public class Main extends Application {
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
         Group root = new Group();
+        GameScene gameScene = new GameScene(graphicsContext, root, SCREEN_WIDTH_HEIGHT, SCREEN_WIDTH_HEIGHT, Color.BLACK);
 
-        Snake snake = new Snake();
-        Food food = new Food();
-
-        GameScene gameScene = new GameScene(
-                graphicsContext, snake, food, root, SCREEN_WIDTH_HEIGHT, SCREEN_WIDTH_HEIGHT, Color.BLACK);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(76), e -> run(gameScene)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(71), e -> run(gameScene)));
         timeline.setCycleCount(Animation.INDEFINITE);
 
         root.getChildren().add(canvas);
@@ -49,7 +45,7 @@ public class Main extends Application {
     }
 
     private static void run(GameScene gameScene) {
-        if (!gameScene.isStart() && !gameScene.isGameOver()) {
+        if (!gameScene.isStart() && !gameScene.isGameOver()) { // game not yet started
             score = 0;
             gameScene.drawGrid();
             gameScene.drawScore(score);
@@ -57,7 +53,7 @@ public class Main extends Application {
             gameScene.generateFood();
             gameScene.drawFood();
         }
-        if (gameScene.isStart() && !gameScene.isGameOver()) {
+        if (gameScene.isStart() && !gameScene.isGameOver()) { // game has started
             gameScene.drawGrid();
             gameScene.drawScore(score);
 
@@ -71,7 +67,7 @@ public class Main extends Application {
             gameScene.getSnake().move();
             gameScene.drawSnake();
         }
-        if (!gameScene.isStart() && gameScene.isGameOver()) {
+        if (!gameScene.isStart() && gameScene.isGameOver()) { // game is over
             gameScene.drawGrid();
             gameScene.drawScore(score);
             gameScene.drawGameOverMessage();

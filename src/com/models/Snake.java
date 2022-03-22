@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Snake {
     private final Point2D defaultPosition; // snake head
+    private final List<Point2D> body;
+
     private int xSpeed;
     private int ySpeed;
     private String direction;
-    private final List<Point2D> body;
     private int length;
     private Color currentColor;
 

@@ -9,23 +9,23 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class GameScene extends Scene {
-    public final int GRID_WIDTH_HEIGHT = 800; // 800 x 800
-    public final int GRID_ROWS_COLUMNS = 20; // 20 x 20
-    public final int CELL_SIZE = GRID_WIDTH_HEIGHT / GRID_ROWS_COLUMNS; // 40
-
     private final GraphicsContext graphicsContext;
-
     private final Snake snake;
     private final Food food;
 
     private boolean start;
     private boolean gameOver;
 
-    public GameScene(GraphicsContext graphicsContext, Snake snake, Food food, Group root, double width, double height, Color color) {
-        super(root, width, height, color);
+    public final int GRID_ROWS_COLUMNS = 20;
+    public final int CELL_SIZE;
+
+    public GameScene(GraphicsContext graphicsContext, Group root, double screenWidth, double screenHeight, Color color) {
+        super(root, screenWidth, screenHeight, color);
+        // width or height can be used to divide because there the same size
+        this.CELL_SIZE = (int) screenWidth / GRID_ROWS_COLUMNS;
         this.graphicsContext = graphicsContext;
-        this.snake = snake;
-        this.food = food;
+        this.snake = new Snake();
+        this.food = new Food();
         this.start = false;
         this.gameOver = false;
 
@@ -82,8 +82,8 @@ public class GameScene extends Scene {
 
     public void drawSnake() {
         for (Point2D bodyPart : snake.getBody()) {
-            graphicsContext.setStroke(Color.BLACK);
             graphicsContext.setFill(snake.getCurrentColor());
+            graphicsContext.setStroke(Color.BLACK);
 
             graphicsContext.strokeRect(bodyPart.getX(), bodyPart.getY(), CELL_SIZE, CELL_SIZE);
             graphicsContext.fillRect(bodyPart.getX(), bodyPart.getY(), CELL_SIZE, CELL_SIZE);
