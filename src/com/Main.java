@@ -16,12 +16,6 @@ import javafx.util.Duration;
 public class Main extends Application {
     private final static int SCREEN_WIDTH_HEIGHT = 800;
 
-    private static int score;
-
-    static {
-        score = 0;
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         Canvas canvas = new Canvas(SCREEN_WIDTH_HEIGHT, SCREEN_WIDTH_HEIGHT);
@@ -46,20 +40,20 @@ public class Main extends Application {
 
     private static void run(GameScene gameScene) {
         if (!gameScene.isStart() && !gameScene.isGameOver()) { // game not yet started
-            score = 0;
+            gameScene.setScore(0);
             gameScene.drawGrid();
-            gameScene.drawScore(score);
+            gameScene.drawScore();
             gameScene.drawSnake();
             gameScene.generateFood();
             gameScene.drawFood();
         }
         if (gameScene.isStart() && !gameScene.isGameOver()) { // game has started
             gameScene.drawGrid();
-            gameScene.drawScore(score);
+            gameScene.drawScore();
 
             gameScene.checkCollision();
 
-            if (gameScene.getFood().getIsEaten()) ++score;
+            if (gameScene.getFood().getIsEaten()) gameScene.incrementScore();
 
             gameScene.generateFood();
             gameScene.drawFood();
@@ -69,7 +63,7 @@ public class Main extends Application {
         }
         if (!gameScene.isStart() && gameScene.isGameOver()) { // game is over
             gameScene.drawGrid();
-            gameScene.drawScore(score);
+            gameScene.drawScore();
             gameScene.drawGameOverMessage();
             gameScene.getSnake().reset();
         }

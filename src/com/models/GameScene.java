@@ -15,6 +15,7 @@ public class GameScene extends Scene {
 
     private boolean start;
     private boolean gameOver;
+    private int score;
 
     public final int GRID_ROWS_COLUMNS = 20;
     public final int CELL_SIZE;
@@ -23,11 +24,13 @@ public class GameScene extends Scene {
         super(root, screenWidth, screenHeight, color);
         // width or height can be used to divide because there the same size
         this.CELL_SIZE = (int) screenWidth / GRID_ROWS_COLUMNS;
+
         this.graphicsContext = graphicsContext;
         this.snake = new Snake();
         this.food = new Food();
         this.start = false;
         this.gameOver = false;
+        this.score = 0;
 
         this.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.LEFT) {
@@ -60,10 +63,10 @@ public class GameScene extends Scene {
         graphicsContext.fillText("Press R to Reset", 150, 480);
     }
 
-    public void drawScore(int score) {
+    public void drawScore() {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
-        graphicsContext.fillText("Score: " + score, 40, 30);
+        graphicsContext.fillText("Score: " + this.score, 40, 30);
     }
 
     public void drawGrid() {
@@ -152,6 +155,10 @@ public class GameScene extends Scene {
         }
     }
 
+    public void incrementScore() {
+        this.score++;
+    }
+
     public Snake getSnake() {
         return snake;
     }
@@ -166,5 +173,9 @@ public class GameScene extends Scene {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
