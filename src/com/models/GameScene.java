@@ -94,13 +94,6 @@ public class GameScene extends Scene {
     }
 
     public void generateFood() {
-        if (food.getPosition() == null || food.getPosition().equals(snake.getDefaultPosition())) {
-            Point2D position;
-            do {
-                position = food.generateNewPosition(this);
-            } while (position.equals(snake.getBody().get(snake.getBody().size() - 1)));
-            food.setPosition(position);
-        }
         if (food.getIsEaten()) {
             Point2D foodPosition = food.generateNewPosition(this);
             for (Point2D body : snake.getBody()) {
@@ -112,6 +105,12 @@ public class GameScene extends Scene {
             }
             food.generateColor();
             food.setIsEaten(false);
+        } else if (food.getPosition() == null || food.getPosition().equals(snake.getDefaultPosition())) {
+            Point2D position;
+            do {
+                position = food.generateNewPosition(this);
+            } while (position.equals(snake.getBody().get(snake.getBody().size() - 1)));
+            food.setPosition(position);
         }
     }
 
@@ -146,7 +145,7 @@ public class GameScene extends Scene {
             start = false;
         } else { // snake eats its own tail
             for (int i = 1; i < snake.getBody().size(); ++i) {
-                if (snake.getBody().get(0).equals(snake.getBody().get(i))) {
+                if (snake.getBody().get(snake.getBody().size() - 1).equals(snake.getBody().get(i - 1))) {
                     gameOver = true;
                     start = false;
                     break;
