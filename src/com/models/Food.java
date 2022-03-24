@@ -29,10 +29,10 @@ public class Food {
         this.eaten = false;
     }
 
-    public Point2D generateNewPosition(GameScene gameScene) {
+    public void generateNewPosition(GameScene gameScene) {
         int xPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.CELL_SIZE;
         int yPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.CELL_SIZE;
-        return new Point2D(xPosition, yPosition);
+        this.position = new Point2D(xPosition, yPosition);
     }
 
     public void generateColor() {
@@ -41,10 +41,6 @@ public class Food {
 
     public Point2D getPosition() {
         return position;
-    }
-
-    public void setPosition(Point2D position) {
-        this.position = position;
     }
 
     public int getCurrentColor() {

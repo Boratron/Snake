@@ -22,9 +22,9 @@ public class Snake {
         ySpeed = 0;
         direction = "right"; // default facing direction
         body = new ArrayList<>(); // end of the arraylist will be the snake's head
+        body.add(defaultPosition);
         length = 1;
         currentColor = Color.LAWNGREEN;
-        body.add(defaultPosition);
     }
 
     public void reset() {
@@ -76,10 +76,6 @@ public class Snake {
 
     public void incrementLength() {
         ++length;
-    }
-
-    public Point2D getDefaultPosition() {
-        return defaultPosition;
     }
 
     public List<Point2D> getBody() {

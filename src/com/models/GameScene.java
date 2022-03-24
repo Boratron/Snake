@@ -95,22 +95,14 @@ public class GameScene extends Scene {
 
     public void generateFood() {
         if (food.getIsEaten()) {
-            Point2D foodPosition = food.generateNewPosition(this);
-            for (Point2D body : snake.getBody()) {
-                if (foodPosition.equals(body)) { // generate new position if food spawn on the snake's body
-                    foodPosition = food.generateNewPosition(this);
-                } else {
-                    food.setPosition(foodPosition);
-                }
-            }
+            food.generateNewPosition(this);
             food.generateColor();
             food.setIsEaten(false);
-        } else if (food.getPosition() == null || food.getPosition().equals(snake.getDefaultPosition())) {
-            Point2D position;
+        }
+        if (food.getPosition() == null || snake.getBody().contains(food.getPosition())) {
             do {
-                position = food.generateNewPosition(this);
-            } while (position.equals(snake.getBody().get(snake.getBody().size() - 1)));
-            food.setPosition(position);
+                food.generateNewPosition(this);
+            } while (snake.getBody().contains(food.getPosition()));
         }
     }
 
