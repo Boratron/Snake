@@ -1,6 +1,6 @@
 package com;
 
-import com.models.*;
+import com.scene.GameScene;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -39,21 +39,21 @@ public class Main extends Application {
     }
 
     private static void run(GameScene gameScene) {
-        if (!gameScene.isStart() && !gameScene.isGameOver()) { // game not yet started
-            gameScene.setScore(0);
+        if (!gameScene.getGameState().isStart() && !gameScene.getGameState().isGameOver()) { // game not yet started
+            gameScene.getGameState().setScore(0);
             gameScene.drawGrid();
             gameScene.drawScore();
             gameScene.drawSnake();
             gameScene.generateFood();
             gameScene.drawFood();
         }
-        if (gameScene.isStart() && !gameScene.isGameOver()) { // game has started
+        if (gameScene.getGameState().isStart() && !gameScene.getGameState().isGameOver()) { // game has started
             gameScene.drawGrid();
             gameScene.drawScore();
 
             gameScene.checkCollision();
 
-            if (gameScene.getFood().getIsEaten()) gameScene.incrementScore();
+            if (gameScene.getFood().getIsEaten()) gameScene.getGameState().incrementScore();
 
             gameScene.generateFood();
             gameScene.drawFood();
@@ -61,7 +61,7 @@ public class Main extends Application {
             gameScene.getSnake().move();
             gameScene.drawSnake();
         }
-        if (!gameScene.isStart() && gameScene.isGameOver()) { // game is over
+        if (!gameScene.getGameState().isStart() && gameScene.getGameState().isGameOver()) { // game is over
             gameScene.drawGrid();
             gameScene.drawScore();
             gameScene.drawGameOverMessage();

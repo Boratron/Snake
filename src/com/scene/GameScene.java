@@ -1,5 +1,8 @@
-package com.models;
+package com.scene;
 
+import com.model.Food;
+import com.model.GameState;
+import com.model.Snake;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,10 +15,7 @@ public class GameScene extends Scene {
     private final GraphicsContext graphicsContext;
     private final Snake snake;
     private final Food food;
-
-    private boolean start;
-    private boolean gameOver;
-    private int score;
+    private final GameState gameState;
 
     public final int GRID_ROWS_COLUMNS = 20;
     public final int CELL_SIZE;
@@ -28,30 +28,28 @@ public class GameScene extends Scene {
         this.graphicsContext = graphicsContext;
         this.snake = new Snake();
         this.food = new Food();
-        this.start = false;
-        this.gameOver = false;
-        this.score = 0;
+        this.gameState = new GameState();
 
         this.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.LEFT) {
                 snake.changeDirection("left");
             }
-            if (!gameOver) {
+            if (!gameState.isGameOver()) {
                 if (keyEvent.getCode() == KeyCode.RIGHT) {
                     snake.changeDirection("right");
-                    start = true;
+                    gameState.setStart(true);
                 }
                 if (keyEvent.getCode() == KeyCode.UP) {
                     snake.changeDirection("up");
-                    start = true;
+                    gameState.setStart(true);
                 }
                 if (keyEvent.getCode() == KeyCode.DOWN) {
                     snake.changeDirection("down");
-                    start = true;
+                    gameState.setStart(true);
                 }
             }
             if (keyEvent.getCode() == KeyCode.R) {
-                gameOver = false;
+                gameState.setGameOver(false);
             }
         });
     }
@@ -66,7 +64,7 @@ public class GameScene extends Scene {
     public void drawScore() {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
-        graphicsContext.fillText("Score: " + this.score, 40, 30);
+        graphicsContext.fillText("Score: " + gameState.getScore(), 40, 30);
     }
 
     public void drawGrid() {
@@ -93,19 +91,6 @@ public class GameScene extends Scene {
         }
     }
 
-    public void generateFood() {
-        if (food.getIsEaten()) {
-            food.generateNewPosition(this);
-            food.generateColor();
-            food.setIsEaten(false);
-        }
-        if (food.getPosition() == null || snake.getBody().contains(food.getPosition())) {
-            do {
-                food.generateNewPosition(this);
-            } while (snake.getBody().contains(food.getPosition()));
-        }
-    }
-
     public void drawFood() {
         graphicsContext.setFill(food.COLORS[food.getCurrentColor()]);
         graphicsContext.setStroke(Color.BLACK);
@@ -124,6 +109,19 @@ public class GameScene extends Scene {
         );
     }
 
+    public void generateFood() {
+        if (food.getIsEaten()) {
+            food.generateNewPosition(this);
+            food.generateColor();
+            food.setIsEaten(false);
+        }
+        if (food.getPosition() == null || snake.getBody().contains(food.getPosition())) {
+            do {
+                food.generateNewPosition(this);
+            } while (snake.getBody().contains(food.getPosition()));
+        }
+    }
+
     public void checkCollision() {
         if (snake.getBody().get(snake.getBody().size() - 1).equals(food.getPosition())) { // snake eats food
             snake.incrementLength();
@@ -133,21 +131,17 @@ public class GameScene extends Scene {
                 snake.getBody().get(snake.getBody().size() - 1).getY() < CELL_SIZE ||
                 snake.getBody().get(snake.getBody().size() - 1).getX() > CELL_SIZE * (GRID_ROWS_COLUMNS - 2) ||
                 snake.getBody().get(snake.getBody().size() - 1).getY() > CELL_SIZE * (GRID_ROWS_COLUMNS - 2)) {
-            gameOver = true;
-            start = false;
+            gameState.setGameOver(true);
+            gameState.setStart(false);
         } else { // snake eats its own tail
             for (int i = 1; i < snake.getBody().size(); ++i) {
                 if (snake.getBody().get(snake.getBody().size() - 1).equals(snake.getBody().get(i - 1))) {
-                    gameOver = true;
-                    start = false;
+                    gameState.setGameOver(true);
+                    gameState.setStart(false);
                     break;
                 }
             }
         }
-    }
-
-    public void incrementScore() {
-        this.score++;
     }
 
     public Snake getSnake() {
@@ -158,15 +152,7 @@ public class GameScene extends Scene {
         return food;
     }
 
-    public boolean isStart() {
-        return start;
-    }
-
-    public boolean isGameOver() {
-        return gameOver;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+    public GameState getGameState() {
+        return gameState;
     }
 }

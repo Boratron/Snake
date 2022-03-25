@@ -1,4 +1,4 @@
-package com.models;
+package com.model;
 
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
