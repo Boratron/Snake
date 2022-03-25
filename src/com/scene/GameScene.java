@@ -125,6 +125,7 @@ public class GameScene extends Scene {
     public void checkCollision() {
         if (snake.getBody().get(snake.getBody().size() - 1).equals(food.getPosition())) { // snake eats food
             snake.incrementLength();
+            gameState.incrementScore();
             snake.setCurrentColor(food.COLORS[food.getCurrentColor()]);
             food.setIsEaten(true);
         } else if (snake.getBody().get(snake.getBody().size() - 1).getX() < CELL_SIZE || // snake is out of bounds

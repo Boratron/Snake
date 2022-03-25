@@ -53,8 +53,6 @@ public class Main extends Application {
 
             gameScene.checkCollision();
 
-            if (gameScene.getFood().getIsEaten()) gameScene.getGameState().incrementScore();
-
             gameScene.generateFood();
             gameScene.drawFood();
 
