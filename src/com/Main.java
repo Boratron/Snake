@@ -44,15 +44,15 @@ public class Main extends Application {
     }
 
     private static void run(GameController gameController) {
-        if (!gameController.getGameState().isStart() && !gameController.getGameState().isGameOver()) { // game not yet started
-            gameController.getGameState().setScore(0);
+        if (!gameController.isStart() && !gameController.isGameOver()) { // game not yet started
+            gameController.setScore(0);
             gameController.updateGameGrid();
             gameController.updateScore();
             gameController.updateSnake();
             gameController.generateFood();
             gameController.updateFood();
         }
-        if (gameController.getGameState().isStart() && !gameController.getGameState().isGameOver()) { // game has started
+        if (gameController.isStart() && !gameController.isGameOver()) { // game has started
             gameController.updateGameGrid();
             gameController.updateScore();
 
@@ -61,14 +61,14 @@ public class Main extends Application {
             gameController.generateFood();
             gameController.updateFood();
 
-            gameController.getSnake().move();
+            gameController.moveSnake();
             gameController.updateSnake();
         }
-        if (!gameController.getGameState().isStart() && gameController.getGameState().isGameOver()) { // game is over
+        if (!gameController.isStart() && gameController.isGameOver()) { // game is over
             gameController.updateGameGrid();
             gameController.updateScore();
             gameController.updateGameOverMessage();
-            gameController.getSnake().reset();
+            gameController.resetSnake();
         }
     }
 

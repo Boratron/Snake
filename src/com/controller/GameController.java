@@ -10,8 +10,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
 public class GameController {
-    private final GraphicsContext graphicsContext;
-
     // models
     private final Snake snake;
     private final Food food;
@@ -21,13 +19,11 @@ public class GameController {
     private final GameView gameView;
 
     public GameController(GraphicsContext graphicsContext, Scene gameScene) {
-        this.graphicsContext = graphicsContext;
-
         this.snake = new Snake();
         this.food = new Food();
         this.gameState = new GameState();
 
-        this.gameView = new GameView();
+        this.gameView = new GameView(graphicsContext);
 
         gameScene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.LEFT) {
@@ -54,23 +50,35 @@ public class GameController {
     }
 
     public void updateGameOverMessage() {
-        gameView.drawGameOverMessage(graphicsContext);
+        gameView.drawGameOverMessage();
     }
 
     public void updateScore() {
-        gameView.drawScore(graphicsContext, gameState);
+        gameView.drawScore(gameState);
     }
 
     public void updateGameGrid() {
-        gameView.drawGrid(graphicsContext);
+        gameView.drawGrid();
     }
 
     public void updateSnake() {
-        gameView.drawSnake(graphicsContext, snake);
+        gameView.drawSnake(snake);
     }
 
     public void updateFood() {
-        gameView.drawFood(graphicsContext, food);
+        gameView.drawFood(food);
+    }
+
+    public void moveSnake() {
+        snake.move();
+    }
+
+    public void resetSnake() {
+        snake.reset();
+    }
+
+    public void setScore(int score) {
+        gameState.setScore(score);
     }
 
     public void generateFood() {
@@ -109,11 +117,11 @@ public class GameController {
         }
     }
 
-    public Snake getSnake() {
-        return snake;
+    public boolean isStart() {
+        return gameState.isStart();
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public boolean isGameOver() {
+        return gameState.isGameOver();
     }
 }

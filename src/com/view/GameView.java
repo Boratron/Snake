@@ -10,20 +10,26 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class GameView {
-    public void drawGameOverMessage(GraphicsContext graphicsContext) {
+    private final GraphicsContext graphicsContext;
+
+    public GameView(GraphicsContext graphicsContext) {
+        this.graphicsContext = graphicsContext;
+    }
+
+    public void drawGameOverMessage() {
         graphicsContext.setFill(Color.CRIMSON);
         graphicsContext.setFont(new Font("Digital-7", 70));
         graphicsContext.fillText("GAME OVER", 205, 400);
         graphicsContext.fillText("Press R to Reset", 150, 480);
     }
 
-    public void drawScore(GraphicsContext graphicsContext, GameState gameState) {
+    public void drawScore(GameState gameState) {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
         graphicsContext.fillText("Score: " + gameState.getScore(), 40, 30);
     }
 
-    public void drawGrid(GraphicsContext graphicsContext) {
+    public void drawGrid() {
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.setStroke(Color.WHITE);
 
@@ -37,7 +43,7 @@ public class GameView {
         }
     }
 
-    public void drawSnake(GraphicsContext graphicsContext, Snake snake) {
+    public void drawSnake(Snake snake) {
         for (Point2D bodyPart : snake.getBody()) {
             graphicsContext.setFill(snake.getCurrentColor());
             graphicsContext.setStroke(Color.BLACK);
@@ -47,7 +53,7 @@ public class GameView {
         }
     }
 
-    public void drawFood(GraphicsContext graphicsContext, Food food) {
+    public void drawFood(Food food) {
         graphicsContext.setFill(food.COLORS[food.getCurrentColor()]);
         graphicsContext.setStroke(Color.BLACK);
 
