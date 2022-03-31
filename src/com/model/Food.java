@@ -1,6 +1,6 @@
 package com.model;
 
-import com.scene.GameScene;
+import com.Main;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 
@@ -30,9 +30,9 @@ public class Food {
         this.eaten = false;
     }
 
-    public void generateNewPosition(GameScene gameScene) {
-        int xPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.CELL_SIZE;
-        int yPosition = (int) (1 + (Math.random() * (gameScene.GRID_ROWS_COLUMNS - 2))) * gameScene.CELL_SIZE;
+    public void generateNewPosition() {
+        int xPosition = (int) (1 + (Math.random() * (Main.GRID_ROWS_COLUMNS - 2))) * Main.CELL_SIZE;
+        int yPosition = (int) (1 + (Math.random() * (Main.GRID_ROWS_COLUMNS - 2))) * Main.CELL_SIZE;
         this.position = new Point2D(xPosition, yPosition);
     }
 
