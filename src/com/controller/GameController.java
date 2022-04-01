@@ -87,10 +87,8 @@ public class GameController {
             food.generateColor();
             food.setIsEaten(false);
         }
-        if (food.getPosition() == null || snake.getBody().contains(food.getPosition())) {
-            do {
-                food.generateNewPosition();
-            } while (snake.getBody().contains(food.getPosition()));
+        while (snake.getBody().contains(food.getPosition())) {
+            food.generateNewPosition();
         }
     }
 

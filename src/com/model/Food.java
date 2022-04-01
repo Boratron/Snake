@@ -24,7 +24,7 @@ public class Food {
     };
 
     public Food() {
-        this.position = null;
+        generateNewPosition();
         this.random = new Random();
         this.currentColor = random.nextInt(COLORS.length);
         this.eaten = false;
