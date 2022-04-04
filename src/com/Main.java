@@ -46,32 +46,37 @@ public class Main extends Application {
     private static void run(GameController gameController) {
         if (!gameController.isStart() && !gameController.isGameOver()) { // game not yet started
             gameController.setScore(0);
+            gameController.generateFood();
+
+            gameController.clearScreen();
+
             gameController.renderGrid();
             gameController.renderScore();
             gameController.renderHighScore();
             gameController.renderSnake();
-            gameController.generateFood();
             gameController.renderFood();
         }
         if (gameController.isStart() && !gameController.isGameOver()) { // game has started
+            gameController.checkCollision();
+            gameController.generateFood();
+            gameController.moveSnake();
+
+            gameController.clearScreen();
+
             gameController.renderGrid();
             gameController.renderScore();
             gameController.renderHighScore();
-
-            gameController.checkCollision();
-
-            gameController.generateFood();
             gameController.renderFood();
-
-            gameController.moveSnake();
             gameController.renderSnake();
         }
         if (!gameController.isStart() && gameController.isGameOver()) { // game is over
-            gameController.removeGrid();
+            gameController.resetSnake();
             gameController.computeHighScore();
+
+            gameController.clearScreen();
+
             gameController.renderHighScore();
             gameController.renderGameOverMessage();
-            gameController.resetSnake();
         }
     }
 

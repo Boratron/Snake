@@ -36,20 +36,15 @@ public class GameView {
     }
 
     public void drawGrid() {
-        graphicsContext.setFill(Color.BLACK);
         graphicsContext.setStroke(Color.WHITE);
-
-        for (int i = 0; i < Main.GRID_ROWS_COLUMNS; ++i) {
-            for (int j = 0; j < Main.GRID_ROWS_COLUMNS; ++j) {
-                graphicsContext.fillRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
-                if ((i > 0 && i < Main.GRID_ROWS_COLUMNS - 1) && (j > 0 && j < Main.GRID_ROWS_COLUMNS - 1)) {
-                    graphicsContext.strokeRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
-                }
+        for (int i = 1; i < Main.GRID_ROWS_COLUMNS - 1; ++i) {
+            for (int j = 1; j < Main.GRID_ROWS_COLUMNS - 1; ++j) {
+                graphicsContext.strokeRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
             }
         }
     }
 
-    public void eraseGrid() {
+    public void clearScreen() {
         for (int i = 0; i < Main.GRID_ROWS_COLUMNS; ++i) {
             for (int j = 0; j < Main.GRID_ROWS_COLUMNS; ++j) {
                 graphicsContext.clearRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);

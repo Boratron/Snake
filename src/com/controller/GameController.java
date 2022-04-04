@@ -65,8 +65,8 @@ public class GameController {
         gameView.drawGrid();
     }
 
-    public void removeGrid() {
-        gameView.eraseGrid();
+    public void clearScreen() {
+        gameView.clearScreen();
     }
 
     public void renderSnake() {
