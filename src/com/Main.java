@@ -29,7 +29,7 @@ public class Main extends Application {
 
         GameController gameController = new GameController(graphicsContext, gameScene);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(71), e -> run(gameController)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(70), e -> run(gameController)));
         timeline.setCycleCount(Animation.INDEFINITE);
 
         root.getChildren().add(canvas);
@@ -46,28 +46,28 @@ public class Main extends Application {
     private static void run(GameController gameController) {
         if (!gameController.isStart() && !gameController.isGameOver()) { // game not yet started
             gameController.setScore(0);
-            gameController.updateGameGrid();
-            gameController.updateScore();
-            gameController.updateSnake();
+            gameController.renderGrid();
+            gameController.renderScore();
+            gameController.renderSnake();
             gameController.generateFood();
-            gameController.updateFood();
+            gameController.renderFood();
         }
         if (gameController.isStart() && !gameController.isGameOver()) { // game has started
-            gameController.updateGameGrid();
-            gameController.updateScore();
+            gameController.renderGrid();
+            gameController.renderScore();
 
             gameController.checkCollision();
 
             gameController.generateFood();
-            gameController.updateFood();
+            gameController.renderFood();
 
             gameController.moveSnake();
-            gameController.updateSnake();
+            gameController.renderSnake();
         }
         if (!gameController.isStart() && gameController.isGameOver()) { // game is over
-            gameController.updateGameGrid();
-            gameController.updateScore();
-            gameController.updateGameOverMessage();
+            gameController.renderGrid();
+            gameController.renderScore();
+            gameController.renderGameOverMessage();
             gameController.resetSnake();
         }
     }

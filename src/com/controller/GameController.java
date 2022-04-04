@@ -49,23 +49,23 @@ public class GameController {
         });
     }
 
-    public void updateGameOverMessage() {
+    public void renderGameOverMessage() {
         gameView.drawGameOverMessage();
     }
 
-    public void updateScore() {
+    public void renderScore() {
         gameView.drawScore(gameState);
     }
 
-    public void updateGameGrid() {
+    public void renderGrid() {
         gameView.drawGrid();
     }
 
-    public void updateSnake() {
+    public void renderSnake() {
         gameView.drawSnake(snake);
     }
 
-    public void updateFood() {
+    public void renderFood() {
         gameView.drawFood(food);
     }
 
