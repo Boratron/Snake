@@ -57,8 +57,16 @@ public class GameController {
         gameView.drawScore(gameState);
     }
 
+    public void renderHighScore() {
+        gameView.drawHighScore(gameState);
+    }
+
     public void renderGrid() {
         gameView.drawGrid();
+    }
+
+    public void removeGrid() {
+        gameView.eraseGrid();
     }
 
     public void renderSnake() {
@@ -77,8 +85,8 @@ public class GameController {
         snake.reset();
     }
 
-    public void setScore(int score) {
-        gameState.setScore(score);
+    public void computeHighScore() {
+        gameState.computeHighScore();
     }
 
     public void generateFood() {
@@ -113,6 +121,10 @@ public class GameController {
                 }
             }
         }
+    }
+
+    public void setScore(int score) {
+        gameState.setScore(score);
     }
 
     public boolean isStart() {

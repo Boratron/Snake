@@ -29,6 +29,12 @@ public class GameView {
         graphicsContext.fillText("Score: " + gameState.getScore(), 40, 30);
     }
 
+    public void drawHighScore(GameState gameState) {
+        graphicsContext.setFill(Color.LAWNGREEN);
+        graphicsContext.setFont(new Font("Digital-7", 30));
+        graphicsContext.fillText("High Score: " + gameState.getHighScore(), 550, 30);
+    }
+
     public void drawGrid() {
         graphicsContext.setFill(Color.BLACK);
         graphicsContext.setStroke(Color.WHITE);
@@ -39,6 +45,14 @@ public class GameView {
                 if ((i > 0 && i < Main.GRID_ROWS_COLUMNS - 1) && (j > 0 && j < Main.GRID_ROWS_COLUMNS - 1)) {
                     graphicsContext.strokeRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
                 }
+            }
+        }
+    }
+
+    public void eraseGrid() {
+        for (int i = 0; i < Main.GRID_ROWS_COLUMNS; ++i) {
+            for (int j = 0; j < Main.GRID_ROWS_COLUMNS; ++j) {
+                graphicsContext.clearRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
             }
         }
     }

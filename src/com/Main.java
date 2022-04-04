@@ -48,6 +48,7 @@ public class Main extends Application {
             gameController.setScore(0);
             gameController.renderGrid();
             gameController.renderScore();
+            gameController.renderHighScore();
             gameController.renderSnake();
             gameController.generateFood();
             gameController.renderFood();
@@ -55,6 +56,7 @@ public class Main extends Application {
         if (gameController.isStart() && !gameController.isGameOver()) { // game has started
             gameController.renderGrid();
             gameController.renderScore();
+            gameController.renderHighScore();
 
             gameController.checkCollision();
 
@@ -65,8 +67,9 @@ public class Main extends Application {
             gameController.renderSnake();
         }
         if (!gameController.isStart() && gameController.isGameOver()) { // game is over
-            gameController.renderGrid();
-            gameController.renderScore();
+            gameController.removeGrid();
+            gameController.computeHighScore();
+            gameController.renderHighScore();
             gameController.renderGameOverMessage();
             gameController.resetSnake();
         }
