@@ -3,12 +3,14 @@ package com.model;
 public class GameState {
     private boolean start;
     private boolean gameOver;
+    private boolean newHighScore;
     private int score;
     private int highScore;
 
     public GameState() {
         this.start = false;
         this.gameOver = false;
+        this.newHighScore = false;
         this.score = 0;
         this.highScore = 0;
     }
@@ -17,8 +19,11 @@ public class GameState {
         this.score++;
     }
 
-    public void computeHighScore() {
-        if (highScore < score) highScore = score;
+    public void compareScores() {
+        if (highScore < score) {
+            highScore = score;
+            newHighScore = true;
+        }
     }
 
     public boolean isStart() {
@@ -35,6 +40,14 @@ public class GameState {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public boolean isNewHighScore() {
+        return newHighScore;
+    }
+
+    public void setNewHighScore(boolean newHighScore) {
+        this.newHighScore = newHighScore;
     }
 
     public int getScore() {

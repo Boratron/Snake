@@ -66,7 +66,7 @@ public class GameController {
     }
 
     public void clearScreen() {
-        gameView.clearScreen();
+        gameView.drawBlankScreen();
     }
 
     public void renderSnake() {
@@ -85,8 +85,13 @@ public class GameController {
         snake.reset();
     }
 
-    public void computeHighScore() {
-        gameState.computeHighScore();
+    public void compareScores() {
+        gameState.compareScores();
+    }
+
+    public void resetScore() {
+        gameState.setScore(0);
+        gameState.setNewHighScore(false);
     }
 
     public void checkFoodGeneratedOverlapsSnake() {
@@ -118,10 +123,6 @@ public class GameController {
                 }
             }
         }
-    }
-
-    public void setScore(int score) {
-        gameState.setScore(score);
     }
 
     public boolean isStart() {

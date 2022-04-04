@@ -32,7 +32,11 @@ public class GameView {
     public void drawHighScore(GameState gameState) {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
-        graphicsContext.fillText("High Score: " + gameState.getHighScore(), 550, 30);
+        if (gameState.isNewHighScore()) {
+            graphicsContext.fillText("New High Score: " + gameState.getHighScore(), 500, 30);
+        } else {
+            graphicsContext.fillText("High Score: " + gameState.getHighScore(), 550, 30);
+        }
     }
 
     public void drawGrid() {
@@ -44,7 +48,7 @@ public class GameView {
         }
     }
 
-    public void clearScreen() {
+    public void drawBlankScreen() {
         for (int i = 0; i < Main.GRID_ROWS_COLUMNS; ++i) {
             for (int j = 0; j < Main.GRID_ROWS_COLUMNS; ++j) {
                 graphicsContext.clearRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
