@@ -11,7 +11,6 @@ public class Food {
 
     private Point2D position;
     private int currentColor;
-    private boolean eaten;
 
     public final Color[] COLORS = {
             Color.CRIMSON,
@@ -27,7 +26,6 @@ public class Food {
         generateNewPosition();
         this.random = new Random();
         this.currentColor = random.nextInt(COLORS.length);
-        this.eaten = false;
     }
 
     public void generateNewPosition() {
@@ -46,13 +44,5 @@ public class Food {
 
     public int getCurrentColor() {
         return currentColor;
-    }
-
-    public boolean getIsEaten() {
-        return eaten;
-    }
-
-    public void setIsEaten(boolean isEaten) {
-        this.eaten = isEaten;
     }
 }

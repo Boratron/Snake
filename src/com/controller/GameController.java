@@ -89,12 +89,7 @@ public class GameController {
         gameState.computeHighScore();
     }
 
-    public void generateFood() {
-        if (food.getIsEaten()) {
-            food.generateNewPosition();
-            food.generateColor();
-            food.setIsEaten(false);
-        }
+    public void checkFoodGeneratedOverlapsSnake() {
         while (snake.getBody().contains(food.getPosition())) {
             food.generateNewPosition();
         }
@@ -105,7 +100,9 @@ public class GameController {
             snake.incrementLength();
             gameState.incrementScore();
             snake.setCurrentColor(food.COLORS[food.getCurrentColor()]);
-            food.setIsEaten(true);
+            food.generateNewPosition();
+            food.generateColor();
+            checkFoodGeneratedOverlapsSnake();
         } else if (snake.getBody().get(snake.getBody().size() - 1).getX() < Main.CELL_SIZE || // snake is out of bounds
                 snake.getBody().get(snake.getBody().size() - 1).getY() < Main.CELL_SIZE ||
                 snake.getBody().get(snake.getBody().size() - 1).getX() > Main.CELL_SIZE * (Main.GRID_ROWS_COLUMNS - 2) ||

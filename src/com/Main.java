@@ -46,7 +46,7 @@ public class Main extends Application {
     private static void run(GameController gameController) {
         if (!gameController.isStart() && !gameController.isGameOver()) { // game not yet started
             gameController.setScore(0);
-            gameController.generateFood();
+            gameController.checkFoodGeneratedOverlapsSnake();
 
             gameController.clearScreen();
 
@@ -58,7 +58,6 @@ public class Main extends Application {
         }
         if (gameController.isStart() && !gameController.isGameOver()) { // game has started
             gameController.checkCollision();
-            gameController.generateFood();
             gameController.moveSnake();
 
             gameController.clearScreen();
