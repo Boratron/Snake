@@ -26,11 +26,10 @@ public class Controller {
         this.render = new Render(graphicsContext);
 
         gameScene.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.LEFT)) {
+                snake.changeDirection("left");
+            }
             if (!gameState.isGameOver()) {
-                if (keyEvent.getCode().equals(KeyCode.LEFT)) {
-                    snake.changeDirection("left");
-                    gameState.setStart(true);
-                }
                 if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
                     snake.changeDirection("right");
                     gameState.setStart(true);

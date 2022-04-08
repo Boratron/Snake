@@ -64,6 +64,37 @@ public class Render {
             graphicsContext.strokeRect(bodyPart.getX(), bodyPart.getY(), Main.CELL_SIZE, Main.CELL_SIZE);
             graphicsContext.fillRect(bodyPart.getX(), bodyPart.getY(), Main.CELL_SIZE, Main.CELL_SIZE);
         }
+
+        Point2D snakeHead = snake.getBody().get(snake.getBody().size() - 1);
+        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.setStroke(Color.BLACK);
+
+        switch (snake.getDirection()) { // snake eyes position
+            case "left":
+                graphicsContext.fillRoundRect(snakeHead.getX() + 10, snakeHead.getY() + 5, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                graphicsContext.fillRoundRect(snakeHead.getX() + 10, snakeHead.getY() + 25, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                break;
+            case "right":
+                graphicsContext.fillRoundRect(snakeHead.getX() + 20, snakeHead.getY() + 5, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                graphicsContext.fillRoundRect(snakeHead.getX() + 20, snakeHead.getY() + 25, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                break;
+            case "up":
+                graphicsContext.fillRoundRect(snakeHead.getX() + 5, snakeHead.getY() + 10, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                graphicsContext.fillRoundRect(snakeHead.getX() + 25, snakeHead.getY() + 10, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                break;
+            case "down":
+                graphicsContext.fillRoundRect(snakeHead.getX() + 5, snakeHead.getY() + 20, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                graphicsContext.fillRoundRect(snakeHead.getX() + 25, snakeHead.getY() + 20, Main.CELL_SIZE - 30,
+                        Main.CELL_SIZE - 30, Main.CELL_SIZE - 30, Main.CELL_SIZE - 30);
+                break;
+        }
     }
 
     public void renderFood(Food food) {
