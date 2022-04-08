@@ -9,27 +9,27 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class GameView {
+public class Render {
     private final GraphicsContext graphicsContext;
 
-    public GameView(GraphicsContext graphicsContext) {
+    public Render(GraphicsContext graphicsContext) {
         this.graphicsContext = graphicsContext;
     }
 
-    public void drawGameOverMessage() {
+    public void renderGameOverMessage() {
         graphicsContext.setFill(Color.CRIMSON);
         graphicsContext.setFont(new Font("Digital-7", 70));
         graphicsContext.fillText("GAME OVER", 205, 400);
         graphicsContext.fillText("Press R to Reset", 150, 480);
     }
 
-    public void drawScore(GameState gameState) {
+    public void renderScore(GameState gameState) {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
         graphicsContext.fillText("Score: " + gameState.getScore(), 40, 30);
     }
 
-    public void drawHighScore(GameState gameState) {
+    public void renderHighScore(GameState gameState) {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
         if (gameState.isNewHighScore()) {
@@ -39,7 +39,7 @@ public class GameView {
         }
     }
 
-    public void drawGrid() {
+    public void renderGrid() {
         graphicsContext.setStroke(Color.WHITE);
         for (int i = 1; i < Main.GRID_ROWS_COLUMNS - 1; ++i) {
             for (int j = 1; j < Main.GRID_ROWS_COLUMNS - 1; ++j) {
@@ -48,7 +48,7 @@ public class GameView {
         }
     }
 
-    public void drawBlankScreen() {
+    public void renderBlankScreen() {
         for (int i = 0; i < Main.GRID_ROWS_COLUMNS; ++i) {
             for (int j = 0; j < Main.GRID_ROWS_COLUMNS; ++j) {
                 graphicsContext.clearRect(i * Main.CELL_SIZE, j * Main.CELL_SIZE, Main.CELL_SIZE, Main.CELL_SIZE);
@@ -56,7 +56,7 @@ public class GameView {
         }
     }
 
-    public void drawSnake(Snake snake) {
+    public void renderSnake(Snake snake) {
         for (Point2D bodyPart : snake.getBody()) {
             graphicsContext.setFill(snake.getCurrentColor());
             graphicsContext.setStroke(Color.BLACK);
@@ -66,7 +66,7 @@ public class GameView {
         }
     }
 
-    public void drawFood(Food food) {
+    public void renderFood(Food food) {
         graphicsContext.setFill(food.COLORS[food.getCurrentColor()]);
         graphicsContext.setStroke(Color.BLACK);
 

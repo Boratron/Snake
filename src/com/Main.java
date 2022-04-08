@@ -1,6 +1,6 @@
 package com;
 
-import com.controller.GameController;
+import com.controller.Controller;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -27,9 +27,9 @@ public class Main extends Application {
         Group root = new Group();
         Scene gameScene = new Scene(root, SCREEN_WIDTH_HEIGHT, SCREEN_WIDTH_HEIGHT, Color.BLACK);
 
-        GameController gameController = new GameController(graphicsContext, gameScene);
+        Controller controller = new Controller(graphicsContext, gameScene);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(70), e -> run(gameController)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(70), e -> run(controller)));
         timeline.setCycleCount(Animation.INDEFINITE);
 
         root.getChildren().add(canvas);
@@ -43,40 +43,40 @@ public class Main extends Application {
         timeline.play();
     }
 
-    private static void run(GameController gameController) {
-        if (!gameController.isStart() && !gameController.isGameOver()) { // game not yet started
-            gameController.resetScore();
-            gameController.checkFoodGeneratedOverlapsSnake();
+    private static void run(Controller controller) {
+        if (!controller.isStart() && !controller.isGameOver()) { // game not yet started
+            controller.resetScore();
+            controller.checkFoodGeneratedOverlapsSnake();
 
-            gameController.clearScreen();
+            controller.clearScreen();
 
-            gameController.renderGrid();
-            gameController.renderScore();
-            gameController.renderHighScore();
-            gameController.renderSnake();
-            gameController.renderFood();
+            controller.renderGrid();
+            controller.renderScore();
+            controller.renderHighScore();
+            controller.renderSnake();
+            controller.renderFood();
         }
-        if (gameController.isStart() && !gameController.isGameOver()) { // game has started
-            gameController.checkCollision();
-            gameController.moveSnake();
+        if (controller.isStart() && !controller.isGameOver()) { // game has started
+            controller.checkCollision();
+            controller.moveSnake();
 
-            gameController.clearScreen();
+            controller.clearScreen();
 
-            gameController.renderGrid();
-            gameController.renderScore();
-            gameController.renderHighScore();
-            gameController.renderFood();
-            gameController.renderSnake();
+            controller.renderGrid();
+            controller.renderScore();
+            controller.renderHighScore();
+            controller.renderFood();
+            controller.renderSnake();
         }
-        if (!gameController.isStart() && gameController.isGameOver()) { // game over
-            gameController.resetSnake();
-            gameController.compareScores();
+        if (!controller.isStart() && controller.isGameOver()) { // game over
+            controller.resetSnake();
+            controller.compareScores();
 
-            gameController.clearScreen();
+            controller.clearScreen();
 
-            gameController.renderScore();
-            gameController.renderHighScore();
-            gameController.renderGameOverMessage();
+            controller.renderScore();
+            controller.renderHighScore();
+            controller.renderGameOverMessage();
         }
     }
 

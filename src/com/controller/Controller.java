@@ -4,26 +4,26 @@ import com.Main;
 import com.model.Food;
 import com.model.GameState;
 import com.model.Snake;
-import com.view.GameView;
+import com.view.Render;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 
-public class GameController {
+public class Controller {
     // models
     private final Snake snake;
     private final Food food;
     private final GameState gameState;
 
     // view
-    private final GameView gameView;
+    private final Render render;
 
-    public GameController(GraphicsContext graphicsContext, Scene gameScene) {
+    public Controller(GraphicsContext graphicsContext, Scene gameScene) {
         this.snake = new Snake();
         this.food = new Food();
         this.gameState = new GameState();
 
-        this.gameView = new GameView(graphicsContext);
+        this.render = new Render(graphicsContext);
 
         gameScene.setOnKeyPressed(keyEvent -> {
             if (!gameState.isGameOver()) {
@@ -51,31 +51,31 @@ public class GameController {
     }
 
     public void renderGameOverMessage() {
-        gameView.drawGameOverMessage();
+        render.renderGameOverMessage();
     }
 
     public void renderScore() {
-        gameView.drawScore(gameState);
+        render.renderScore(gameState);
     }
 
     public void renderHighScore() {
-        gameView.drawHighScore(gameState);
+        render.renderHighScore(gameState);
     }
 
     public void renderGrid() {
-        gameView.drawGrid();
+        render.renderGrid();
     }
 
     public void clearScreen() {
-        gameView.drawBlankScreen();
+        render.renderBlankScreen();
     }
 
     public void renderSnake() {
-        gameView.drawSnake(snake);
+        render.renderSnake(snake);
     }
 
     public void renderFood() {
-        gameView.drawFood(food);
+        render.renderFood(food);
     }
 
     public void moveSnake() {
