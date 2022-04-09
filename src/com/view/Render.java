@@ -67,7 +67,6 @@ public class Render {
 
         Point2D snakeHead = snake.getBody().get(snake.getBody().size() - 1);
         graphicsContext.setFill(Color.BLACK);
-        graphicsContext.setStroke(Color.BLACK);
 
         switch (snake.getDirection()) { // snake eyes position
             case "left":

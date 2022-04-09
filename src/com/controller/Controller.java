@@ -26,24 +26,21 @@ public class Controller {
         this.render = new Render(graphicsContext);
 
         gameScene.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode().equals(KeyCode.LEFT)) {
-                snake.changeDirection("left");
-            }
             if (!gameState.isGameOver()) {
-                if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
+                if (keyEvent.getCode() == KeyCode.LEFT) {
+                    snake.changeDirection("left");
+                } else if (keyEvent.getCode() == KeyCode.RIGHT) {
                     snake.changeDirection("right");
                     gameState.setStart(true);
-                }
-                if (keyEvent.getCode().equals(KeyCode.UP)) {
+                } else if (keyEvent.getCode() == KeyCode.UP) {
                     snake.changeDirection("up");
                     gameState.setStart(true);
-                }
-                if (keyEvent.getCode().equals(KeyCode.DOWN)) {
+                } else if (keyEvent.getCode() == KeyCode.DOWN) {
                     snake.changeDirection("down");
                     gameState.setStart(true);
                 }
             }
-            if (keyEvent.getCode().equals(KeyCode.R)) {
+            if (keyEvent.getCode() == KeyCode.R) {
                 gameState.setGameOver(false);
             }
         });

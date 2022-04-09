@@ -20,7 +20,7 @@ public class Main extends Application {
     public final static int CELL_SIZE = SCREEN_WIDTH_HEIGHT / GRID_ROWS_COLUMNS;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Canvas canvas = new Canvas(SCREEN_WIDTH_HEIGHT, SCREEN_WIDTH_HEIGHT);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 
