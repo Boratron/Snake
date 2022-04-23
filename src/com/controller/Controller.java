@@ -31,17 +31,17 @@ public class Controller {
                     snake.changeDirection("left");
                 } else if (keyEvent.getCode().equals(KeyCode.RIGHT)) {
                     snake.changeDirection("right");
-                    gameState.setStart(true);
+                    if (!gameState.isStart()) gameState.setStart(true);
                 } else if (keyEvent.getCode().equals(KeyCode.UP)) {
                     snake.changeDirection("up");
-                    gameState.setStart(true);
+                    if (!gameState.isStart()) gameState.setStart(true);
                 } else if (keyEvent.getCode().equals(KeyCode.DOWN)) {
                     snake.changeDirection("down");
-                    gameState.setStart(true);
+                    if (!gameState.isStart()) gameState.setStart(true);
                 }
             }
             if (keyEvent.getCode().equals(KeyCode.R)) {
-                gameState.setGameOver(false);
+                if (gameState.isGameOver()) gameState.setGameOver(false);
             }
         });
     }
@@ -88,7 +88,7 @@ public class Controller {
 
     public void resetScore() {
         gameState.setScore(0);
-        gameState.setNewHighScore(false);
+        gameState.setHighScoreIsNew(false);
     }
 
     public void checkFoodGeneratedOverlapsSnake() {

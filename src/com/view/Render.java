@@ -32,7 +32,7 @@ public class Render {
     public void renderHighScore(GameState gameState) {
         graphicsContext.setFill(Color.LAWNGREEN);
         graphicsContext.setFont(new Font("Digital-7", 30));
-        if (gameState.isNewHighScore()) {
+        if (gameState.isHighScoreNew()) {
             graphicsContext.fillText("New High Score: " + gameState.getHighScore(), 500, 30);
         } else {
             graphicsContext.fillText("High Score: " + gameState.getHighScore(), 550, 30);
