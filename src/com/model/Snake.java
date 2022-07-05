@@ -47,22 +47,24 @@ public class Snake {
     }
 
     public void move() {
+        int speed = 40;
+
         switch (direction) {
             case "left":
-                xSpeed = -40;
+                xSpeed = -speed;
                 ySpeed = 0;
                 break;
             case "right":
-                xSpeed = 40;
+                xSpeed = speed;
                 ySpeed = 0;
                 break;
             case "up":
                 xSpeed = 0;
-                ySpeed = -40;
+                ySpeed = -speed;
                 break;
             case "down":
                 xSpeed = 0;
-                ySpeed = 40;
+                ySpeed = speed;
                 break;
         }
 
